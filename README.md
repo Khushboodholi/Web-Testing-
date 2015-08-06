@@ -1,5 +1,5 @@
 # Web testing
-## Broken Line 
+## Broken Links
 
 Step 1: Program uses Jspop Library to conncet to the Url.
 
