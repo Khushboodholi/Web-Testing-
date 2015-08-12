@@ -6,6 +6,8 @@
 package crawler;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -42,6 +44,32 @@ public class SpiderLeg
             Connection connection = Jsoup.connect(url).userAgent(USER_AGENT);
             Document htmlDocument1 = connection.get();
             this.htmlDocument = htmlDocument1;
+            
+            //Findind the broken links for Image Link
+            Elements media = htmlDocument.select("[src]");
+            
+        for (Element src : media) {
+            if (src.tagName().equals("img"))
+            {
+               String str= src.attr("abs:src");
+            
+            URL url1=new URL(str);
+            //System.out.println(src.attr("abs:src"));  
+            
+            isLinkBroken(url1);                                    
+                               
+                                           
+            }
+        }
+        
+        
+            
+            
+            
+            
+            
+            
+            
             if(connection.response().statusCode()!= 200) // 200 is the HTTP OK status code
                                                           
             {
@@ -104,5 +132,43 @@ public class SpiderLeg
     {
         return this.links;
     }
+    
+    
+    
+    
+    public static void isLinkBroken(URL url) //Check if the image Link is broken or not
+ 
+	{
+ 
+	   
+	     
+ 
+		try
+ 
+                {
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.connect();
+ 
+		     String response = connection.getResponseMessage();	        
+ 
+		    connection.disconnect();
+                   
+                     if (connection.getResponseCode()!=(200)){
+		    System.out.println("Broken Image Link : "+url+"...."+response+"..."+connection.getResponseCode());
+                     }
+                     
+		}
+ 
+		catch(Exception exp)
+ 
+		{
+ 
+			System.out.println("Invaid Image URL"+url);
+ 		     
+		}  				
+ 
+	}
+    
+    
 
 }
