@@ -1,10 +1,8 @@
 # Web testing
 ## Broken Links
 
-Step 1: Program uses Jspop Library to conncet to the Url.
+Step 1: Connect and collect the source code of the website.
+Step 2: Parse the source code to retrieve all the URL’s in the web page.
+Step 3: Check for the correctness of the link (including image links).
+Step 4: Visit the next link, GOTO step 1.
 
-step 2: Using Element class we extract all the hysperlinks in URL.
-
-step 3 :Connect all the hyperlinks using URLconncetion class and find if there         is any Error during connection.  
-
-step 4: Dispaly all the broken Links. 
