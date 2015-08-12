@@ -37,15 +37,13 @@ public class SpiderLeg
     public void crawl(String url)
     {
         Spider s = new Spider();
-        //Connection connection = null; 
-         //Connection connection = Jsoup.connect(url).userAgent(USER_AGENT);
         try
         {
             Connection connection = Jsoup.connect(url).userAgent(USER_AGENT);
             Document htmlDocument1 = connection.get();
             this.htmlDocument = htmlDocument1;
             
-            //Findind the broken links for Image Link
+            //Finding the broken links for all Image Link
             Elements media = htmlDocument.select("[src]");
             
         for (Element src : media) {
@@ -54,23 +52,15 @@ public class SpiderLeg
                String str= src.attr("abs:src");
             
             URL url1=new URL(str);
-            //System.out.println(src.attr("abs:src"));  
-            
-            isLinkBroken(url1);                                    
+                       
+            isLinkBroken(url1);   //call function to find the broken lines                                 
                                
                                            
             }
         }
         
-        
-            
-            
-            
-            
-            
-            
-            
-            if(connection.response().statusCode()!= 200) // 200 is the HTTP OK status code
+                
+          if(connection.response().statusCode()!= 200) // 200 is the HTTP OK status code
                                                           
             {
                 System.out.println( url+" Broken Links with code --"+connection.response().statusCode());
@@ -140,10 +130,7 @@ public class SpiderLeg
  
 	{
  
-	   
-	     
- 
-		try
+	  try
  
                 {
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -162,13 +149,8 @@ public class SpiderLeg
 		catch(Exception exp)
  
 		{
- 
-			System.out.println("Invaid Image URL"+url);
- 		     
-		}  				
+ 		System.out.println("Invaid Image URL"+url);
+    	        }  				
  
 	}
-    
-    
-
-}
+  }
